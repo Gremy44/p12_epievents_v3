@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, validates
 from sqlalchemy.ext.declarative import declarative_base
 from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError
-from sqlalchemy.orm import validates
 
 Base = declarative_base()
 ph = PasswordHasher()
@@ -27,3 +25,25 @@ class User(Base):
     role_id = Column(Integer, ForeignKey('role.id'), default=1)
 
     role = relationship(Role)
+
+    @validates('password')
+    def validate_password(self, key, password):
+        hashed_password = ph.hash(password)
+        return hashed_password
+    
+    def verify_password(self, password):
+        """
+        Vérifie si le mot de passe fourni correspond au mot de passe stocké dans le modèle.
+
+        Args:
+        - password (str): Mot de passe fourni par l'utilisateur.
+
+        Returns:
+        - bool: True si le mot de passe est correct, False sinon.
+        """
+        try:
+            ph.verify(self.password, password)
+            return True
+        except Exception:
+            return False
+

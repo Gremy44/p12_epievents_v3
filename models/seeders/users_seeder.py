@@ -1,18 +1,18 @@
 from flask_seeder import Seeder, Faker, generator
-from sqlalchemy.orm import sessionmaker
-from config import engine
 from models.users_model import User
 import random
 from datetime import datetime
-
-Session = sessionmaker(bind=engine)
-session = Session()
+from config import Session
+from argon2 import PasswordHasher
 
 # All seeders inherit from Seeder
 class UserSeeder(Seeder):
   # run() will be called by Flask-Seeder
   def run(self):
-    db = self.db
+    # instance mdp et session
+    session = Session()
+    ph = PasswordHasher()
+    
     # Create a new Faker and tell it how to create User objects
     faker = Faker(
       cls=User,
@@ -29,9 +29,10 @@ class UserSeeder(Seeder):
         "role_id": random.randint(1, 3)
       }
     )
-
     # Create 5 users
     for user in faker.create(5):
+        hashed_password = ph.hash(user.password)
+        user.password = hashed_password
         print("Adding user: %s" % user)
         session.add(user)
         session.commit()
