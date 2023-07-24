@@ -26,6 +26,7 @@ class Customers_View:
         print('2 - Ajouter un Client')
         print('3 - Modifier un Client')
         print('4 - Supprimer un Client')
+        print('5 - Retour')
         print('----------------------------')
     
     def customers_view_list(self, table_name, customers):
@@ -96,12 +97,15 @@ class Customers_View:
         Args:
             customer (Customer): customer object
         '''
+
         Utils().clear_console()
         
-        print("----------------------------------------------------------") # 58
-        print("------------------  Modifier Client  ---------------------") # 
-        print("----------------------------------------------------------") # 58
-    
+        print("----------------------------------------------------------")
+        print("------------------  Modifier Client  ---------------------") 
+        print("----------------------------------------------------------")
+        print("----------  Laissez le champ vide si inchangé  -----------")
+        print("----------------------------------------------------------")
+        
         print(f'Nom complet : {customer.complet_name}')
         complet_name = input("- Modifier Nom complet : ")
         print(f'Email : {customer.email}')
@@ -110,7 +114,11 @@ class Customers_View:
         phone = input("- Modifier Téléphone : ")
         print(f'Compagnie : {customer.company_name}')
         company_name = input("- Modifier Compagnie : ")
-        print(f'Contacte de vente : {customer.sale_contact}')
+        print(f'Contacte de vente : ID: {customer.sale_contact.id} || Nom: {customer.sale_contact.first_name} {customer.sale_contact.last_name}')
+        
+        my_saler = Utils().retrieve_saler()
+        Utils().print_queryset(my_saler)
+        
         sale_contact_id = input("- Modifier Contact vendeur : ")
         
         return {

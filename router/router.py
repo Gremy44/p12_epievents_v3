@@ -1,7 +1,7 @@
 from controllers.login_controller import Login_Controller
-# from controllers.users_controller import Users_Controller
-# from controllers.contracts_controller import Contracts_Controller
-# from controllers.events_controller import Events_Controller
+from controllers.users_controller import Users_Controller
+from controllers.contracts_controller import Contracts_Controller
+from controllers.events_controller import Events_Controller
 from controllers.customers_controller import Customers_Controller
 
 from views.generic_errors import Generic_Errors
@@ -44,14 +44,11 @@ class Console:
                     case '1':
                         Customers_Controller().customers_menu()
                     case '2':
-                        print("C'est 2")
-                        # Contracts_Controller().contracts()
+                        Contracts_Controller().contracts_menu()
                     case '3':
-                        print("C'est 3")
-                        # Events_Controller().events()
+                        Events_Controller().events_menu()
                     case '4':
-                        print("C'est 4")
-                        # Users_Controller().users()
+                        Users_Controller().users_menu()
             else:
                 Generic_Errors().wrong_input()
                 Utils().wait_user_input()

@@ -10,7 +10,7 @@ from .customers_model import Customer
 class Event(Base):
     __tablename__ = 'event'
     id = Column(Integer, primary_key=True)
-    event_name = Column(String(100))
+    name = Column(String(100))
     date_start = Column(DateTime)
     date_end = Column(DateTime)
     location = Column(String(100))

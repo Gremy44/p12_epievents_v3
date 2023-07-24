@@ -1,4 +1,5 @@
 from utils.utils import Utils
+import getpass
 
 class Login_view:
     
@@ -13,5 +14,5 @@ class Login_view:
         print("----------------------------------------------------------") # 58
         
         email = input("- Enter your email : ")
-        password = input("- Enter your password : ")
+        password = getpass.getpass("- Enter your password : ")
         return (email, password)

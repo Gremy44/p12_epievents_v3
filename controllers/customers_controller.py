@@ -24,18 +24,21 @@ class Customers_Controller:
         
         choix = self.my_view.customers_view_list(table_name, customers)
         
-        match choix[0]:
-            case "1":
-                customer_id = self.my_view.customers_id_input()
-                self.customers_detail(customer_id)
-            case "2":
-                self.customers_add()
-            case "3":
-                customer_id = self.my_view.customers_id_input()
-                self.customers_update(customer_id)
-            case "4":
-                customer_id = self.my_view.customers_id_input()
-                self.customers_delete(customer_id)
+        try:
+            match choix[0]:
+                case "1":
+                    customer_id = self.my_view.customers_id_input()
+                    self.customers_detail(customer_id)
+                case "2":
+                    self.customers_add()
+                case "3":
+                    customer_id = self.my_view.customers_id_input()
+                    self.customers_update(customer_id)
+                case "4":
+                    customer_id = self.my_view.customers_id_input()
+                    self.customers_delete(customer_id)
+        except IndexError:
+            return
     
     def customers_detail(self, customer_id):
         """_summary_
@@ -85,12 +88,17 @@ class Customers_Controller:
         
         form = self.my_view.customers_view_update(customer)
         
-        customer.complet_name = form['complet_name']
-        customer.email = form['email']
-        customer.phone = form['phone']
-        customer.company_name = form['company_name']
+        if form['complet_name'] != "":
+            customer.complet_name = form['complet_name']
+        if form['email'] != "":
+            customer.email = form['email']
+        if form['phone'] != "":
+            customer.phone = form['phone']
+        if form['company_name'] != "":
+            customer.company_name = form['company_name']
         customer.date_update = datetime.now()
-        customer.sale_contact_id = form['sale_contact_id']
+        if form['sale_contact_id'] != "":
+            customer.sale_contact_id = form['sale_contact_id']
         
         session.commit()
         
@@ -106,7 +114,3 @@ class Customers_Controller:
         session.commit()
         
         self.my_view.customers_delete_validate()
-            
-        
-        
-        

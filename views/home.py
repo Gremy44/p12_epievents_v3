@@ -1,9 +1,11 @@
 from views.generic_errors import Generic_Errors
 from utils.utils import Utils
+import sys
 
 class Home_view:
     def __init__(self, user):
         self.user = user
+        self.quit_message = "CIAO !! Press any key to exit"
     
     def home(self):
         '''
@@ -30,7 +32,6 @@ class Home_view:
         else:
             Generic_Errors().unknown_role()
             
-
     def menu_admin(self):
         '''
         Display the admin menu
@@ -40,10 +41,17 @@ class Home_view:
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
         print("4 - Gestion des Utilisateurs")
+        print("5 - Quitter")
         
-        return (input("Votre choix : "), (1,4))
+        rep = input("Votre choix : ")
         
-        
+        if rep == '5':
+            Utils().clear_console()
+            input(self.quit_message)
+            sys.exit()
+            
+        return (rep, (1,4))
+            
     def menu_sale(self):
         '''
         Display the sale menu
@@ -52,8 +60,16 @@ class Home_view:
         print("1 - Gestion des Clients")
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
+        print("4 - Quitter")
         
-        return (input("Votre choix : "), (1,3))
+        rep = input("Votre choix : ")
+        
+        if rep == '4':
+            Utils().clear_console()
+            input(self.quit_message)
+            sys.exit()
+            
+        return (rep, (1,3))
         
     def menu_support(self):
         '''
@@ -63,8 +79,16 @@ class Home_view:
         print("1 - Gestion des Clients")
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
+        print("4 - Quitter")
         
-        return (input("Votre choix : "), (1,3))
+        rep = input("Votre choix : ")
+        
+        if rep == '4':
+            Utils().clear_console()
+            input(self.quit_message)
+            sys.exit()
+            
+        return (rep, (1,3))
         
     def menu_gestion(self):
         '''
@@ -75,5 +99,13 @@ class Home_view:
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
         print("4 - Gestion des Utilisateurs")
+        print("5 - Quitter")
         
-        return (input("Votre choix : "),(1,4))
+        rep = input("Votre choix : ")
+        
+        if rep == '5':
+            Utils().clear_console()
+            input(self.quit_message)
+            sys.exit()
+            
+        return (rep, (1,4))

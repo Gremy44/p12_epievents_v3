@@ -26,7 +26,7 @@ class UserSeeder(Seeder):
         "is_superuser": False,
         "date_created": datetime.utcnow(),
         "last_login": datetime.utcnow(),
-        "role_id": random.randint(1, 3)
+        "role_id": generator.Integer(start=1, end=3),
       }
     )
     # Create 5 users
