@@ -1,12 +1,15 @@
 from utils.utils import Utils
+from utils.validators import Validators
 from views.generic_errors import Generic_Errors
 
 class Events_View:
     def __init__(self):
-        pass
+        self.validators = Validators()
     
-    def events_id_input(self):
-        return input("Entrer l'id de l'Evènement : ")
+    def events_id_input(self, length_queryset):
+        print("Entrer l'id de l'Evènement : ") 
+        id = self.validator.validator_menu_choice(1, length_queryset) 
+        return id
     
     def events_add_validate(self):
         print("L'Evènement' a bien été ajouté !")
@@ -29,7 +32,7 @@ class Events_View:
         print('5 - Retour')
         print('----------------------------')
     
-    def events_view_list(self, table_name, events, user):
+    def events_view_list(self, table_name, events, user, queryset_length):
         '''
         View events
         
@@ -41,7 +44,7 @@ class Events_View:
         print("----------------------------------------------------------") # 58
         print(f"----------------------{table_name}-------------------------") # 
         print("----------------------------------------------------------") # 58
-        print(user.role_id)
+        print(f"Nombre d'évènements : {queryset_length}")
         
         for event in events:
             try:
@@ -62,8 +65,10 @@ class Events_View:
                     print(f"ID : {me.id}|Nom de l'évènement: {me.name}|Lieu: {me.location}|Client: {me.client.complet_name}|Contrat: {me.contract.id}")
                 
         self.events_crud_action()
-                
-        return input("Votre choix : ")
+        
+        choice = self.validators.validator_menu_choice(1, 5)
+        
+        return choice
     
     def events_view_detail(self, event):
         '''
