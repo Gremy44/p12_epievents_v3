@@ -2,7 +2,7 @@ from utils.utils import Utils
 from views.generic_errors import Generic_Errors
 
 class Events_View:
-    def __init__(self) -> None:
+    def __init__(self):
         pass
     
     def events_id_input(self):
@@ -29,7 +29,7 @@ class Events_View:
         print('5 - Retour')
         print('----------------------------')
     
-    def events_view_list(self, table_name, events):
+    def events_view_list(self, table_name, events, user):
         '''
         View events
         
@@ -41,10 +41,26 @@ class Events_View:
         print("----------------------------------------------------------") # 58
         print(f"----------------------{table_name}-------------------------") # 
         print("----------------------------------------------------------") # 58
+        print(user.role_id)
         
         for event in events:
-            print(f"ID : {event.id}|Nom de l'évènement: {event.name}|Lieu: {event.location}|Client: {event.client.complet_name}|Contrat: {event.contract.id}|Contacte support: {event.support_contact.first_name} {event.support_contact.last_name}")
-    
+            try:
+                print(f"ID : {event.id}|Nom de l'évènement: {event.name}|Lieu: {event.location}|Client: {event.client.complet_name}|Contrat: {event.contract.id}|Contacte support: {event.support_contact.first_name} {event.support_contact.last_name}")
+            except AttributeError:
+                print(f"ID : {event.id}|Nom de l'évènement: {event.name}|Lieu: {event.location}|Client: {event.client.complet_name}|Contrat: {event.contract.id}|Contacte support: Aucun")
+
+        if user.role_id == 3 :
+            print("- Event sans contact support :")
+            for ns in events:
+                if ns.support_contact_id == "":
+                    print(f"ID : {ns.id}|Nom de l'évènement: {ns.name}|Lieu: {ns.location}|Client: {ns.client.complet_name}|Contrat: {ns.contract.id}")
+        
+        if user.role_id == 2 :
+            print("Vos Evènements :")
+            for me in events:
+                if me.support_contact_id == user.id:
+                    print(f"ID : {me.id}|Nom de l'évènement: {me.name}|Lieu: {me.location}|Client: {me.client.complet_name}|Contrat: {me.contract.id}")
+                
         self.events_crud_action()
                 
         return input("Votre choix : ")
@@ -97,8 +113,8 @@ class Events_View:
         Utils().retrieve_client()
         client_id = input("- ID client : ")
         print("ID Contrat associé :")
-        print("Contrats présents dans la base de données :")
-        Utils().retrieve_contract()
+        print("Contrats présents et valide dans la base de données pour ce client:")
+        Utils().retrieve_contract(client_id)
         contract_id = input("- ID contrat : ")
         print("ID Contacte support :")
         support = Utils().retrieve_support()

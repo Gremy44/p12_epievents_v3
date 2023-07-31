@@ -1,9 +1,12 @@
 from views.generic_errors import Generic_Errors
+from utils.validators import Validators
 from utils.utils import Utils
 import sys
 
 class Home_view:
     def __init__(self, user):
+        self.validator = Validators()
+        
         self.user = user
         self.quit_message = "CIAO !! Press any key to exit"
     
@@ -43,7 +46,8 @@ class Home_view:
         print("4 - Gestion des Utilisateurs")
         print("5 - Quitter")
         
-        rep = input("Votre choix : ")
+        # rep = input("Votre choix : ")
+        rep = self.validator.validator_home("response", "Votre choix : ", self.user)
         
         if rep == '5':
             Utils().clear_console()

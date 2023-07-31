@@ -33,22 +33,25 @@ class Console:
             if self.is_logged == False:
                 Generic_Errors.login_error()
         
-            
+        # call function for update last login of the user
+        login.update_last_login(user)
         
         while self.is_logged == True:
+            
+            user = login.logged_user()
             
             self.user_choice = Home_view(user).home()
             
             if self.input_verification() == True:
                 match self.user_choice[0]:
                     case '1':
-                        Customers_Controller().customers_menu()
+                        Customers_Controller(user).customers_menu()
                     case '2':
-                        Contracts_Controller().contracts_menu()
+                        Contracts_Controller(user).contracts_menu()
                     case '3':
-                        Events_Controller().events_menu()
+                        Events_Controller(user).events_menu()
                     case '4':
-                        Users_Controller().users_menu()
+                        Users_Controller(user).users_menu()
             else:
                 Generic_Errors().wrong_input()
                 Utils().wait_user_input()

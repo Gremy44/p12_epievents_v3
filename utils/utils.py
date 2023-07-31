@@ -74,13 +74,14 @@ class Utils:
         for client in clients:
             print(f"ID: {client.id}||Nom: {client.complet_name}|| Compagnie: {client.company_name}")
             
-    def retrieve_contract(self):
+    def retrieve_contract(self, client_id):
         '''
         Return the contract
         '''
         session = Session()
         
-        contracts = session.query(Contract).all()
+        # contracts = session.query(Contract).all()
+        contracts = session.query(Contract).filter(Contract.status == 1, Contract.customer_id == client_id ).all()
         
         for contract in contracts:
             customer_name = contract.customer.complet_name if contract.customer else "N/A"

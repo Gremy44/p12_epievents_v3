@@ -4,10 +4,14 @@ from config import Session
 from views.contracts_view import Contracts_View
 from models.contracts_model import Contract
 
+from permissions.permissions import Permissions
+# mettre les permissions partout avec les décorateurs
+
 class Contracts_Controller:
     
-    def __init__(self):
+    def __init__(self, user):
         self.my_view = Contracts_View()
+        self.user = user
     
     def contracts_menu(self):
         """
@@ -36,12 +40,13 @@ class Contracts_Controller:
                     self.contracts_delete(contract_id)
         except IndexError:
             return
-
+    
     def contracts_detail(self, contract_id):
         """
         Show contract details
         
         args:
+            user (User): User object representing the current user
             contract_id (int): contract id
         """
         session = Session()
@@ -49,7 +54,8 @@ class Contracts_Controller:
         contract = session.query(Contract).filter(Contract.id == contract_id).first()
         
         self.my_view.contracts_view_detail(contract)
-        
+    
+    @Permissions.gestion_required    
     def contracts_add(self):
         """
         Call contracts view to add a contract
@@ -70,7 +76,8 @@ class Contracts_Controller:
         session.commit()
         
         self.my_view.contracts_add_validate()
-        
+    
+    @Permissions.gestion_required   
     def contracts_update(self, contract_id):
         
         session = Session()
@@ -93,7 +100,8 @@ class Contracts_Controller:
         session.commit()
         
         self.my_view.contracts_update_validate()
-        
+    
+    @Permissions.admin_required    
     def contracts_delete(self, contract_id):
         
         session = Session()

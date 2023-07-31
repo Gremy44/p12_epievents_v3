@@ -70,7 +70,7 @@ class Customers_View:
         
     def customers_view_add(self):
         '''
-        View customer add
+        View customer add 
         
         Args:
             table_name (str): table name
@@ -81,12 +81,22 @@ class Customers_View:
         print("------------------  Nouveau Client  ----------------------") # 
         print("----------------------------------------------------------") # 58
         
+        complet_name = input("- Nom complet : ")
+        email = input("- Email : ")
+        phone = input("- Téléphone : ")
+        company_name = input("- Compagnie : ")
+        print("ID Contact vendeur : ")
+        print("Vendeur présents dans la base donnée :")
+        sale = Utils().retrieve_saler()
+        Utils().print_queryset(sale)
+        sale_contact_id = input("- ID Contact vendeur : ")
+        
         return {
-            'complet_name': input("- Nom complet : "),
-            'email': input("- Email : "),
-            'phone': input("- Téléphone : "),
-            'company_name': input("- Compagnie : "),
-            'sale_contact_id': input("- ID Contact vendeur : "),
+            'complet_name': complet_name,
+            'email': email,
+            'phone': phone,
+            'company_name': company_name,
+            'sale_contact_id': sale_contact_id,
         }
 
     
@@ -119,7 +129,7 @@ class Customers_View:
         my_saler = Utils().retrieve_saler()
         Utils().print_queryset(my_saler)
         
-        sale_contact_id = input("- Modifier Contact vendeur : ")
+        sale_contact_id = input("- Modifier Contact vendeur (ID): ")
         
         return {
             'complet_name': complet_name,

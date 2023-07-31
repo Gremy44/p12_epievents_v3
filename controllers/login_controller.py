@@ -2,6 +2,7 @@ from views.login_view import Login_view
 from models.users_model import User
 from models.seeders.users_seeder import UserSeeder
 from config import Session
+from datetime import datetime
 
 class Login_Controller:
     
@@ -37,6 +38,13 @@ class Login_Controller:
             return True
         else:
             return False
+        
+    def update_last_login(self, user):
+        session = Session()
+        
+        user.last_login = datetime.now()
+        
+        session.commit()
     
     def logged_user(self):
         '''

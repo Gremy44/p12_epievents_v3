@@ -4,10 +4,13 @@ from config import Session
 from views.customers_view import Customers_View
 from models.customers_model import Customer
 
+from permissions.permissions import Permissions
+
 class Customers_Controller:
     
-    def __init__(self):
+    def __init__(self, user):
         self.my_view = Customers_View()
+        self.user = user
     
     def customers_menu(self):
         """_summary_
@@ -53,7 +56,7 @@ class Customers_Controller:
         
         self.my_view.customers_view_detail(customer)
         
-        
+    @Permissions.sales_required    
     def customers_add(self):
         """_summary_
         Call custormers view to add a customer
@@ -80,6 +83,7 @@ class Customers_Controller:
         
         self.my_view.customers_add_validate()
     
+    @Permissions.sales_required
     def customers_update(self, customer_id):
         
         session = Session()
@@ -104,6 +108,7 @@ class Customers_Controller:
         
         self.my_view.customers_update_validate()
     
+    @Permissions.admin_required
     def customers_delete(self, customer_id):
         
         session = Session()

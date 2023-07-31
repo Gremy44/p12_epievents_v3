@@ -4,22 +4,25 @@ from config import Session
 from views.events_view import Events_View
 from models.events_model import Event
 
+from permissions.permissions import Permissions
+
 class Events_Controller:
     
-    def __init__(self):
+    def __init__(self, user):
         self.my_view = Events_View()
+        self.user = user
     
     def events_menu(self):
         """_summary_
         Call custormers view to display all events
         """
-        table_name = "Clients"
+        table_name = "Evènements"
         
         
         session = Session()
         events = session.query(Event).all()
         
-        choix = self.my_view.events_view_list(table_name, events)
+        choix = self.my_view.events_view_list(table_name, events, self.user)
         
         try:
             match choix[0]:
@@ -50,6 +53,7 @@ class Events_Controller:
         
         self.my_view.events_view_detail(event)
     
+    @Permissions.sales_required
     def events_add(self):
         """_summary_
         Call custormers view to add a event
@@ -82,6 +86,7 @@ class Events_Controller:
         
         self.my_view.events_add_validate()
     
+    @Permissions.support_required
     def events_update(self, event_id):
         
         session = Session()
@@ -113,6 +118,7 @@ class Events_Controller:
         
         self.my_view.events_update_validate()
     
+    @Permissions.admin_required
     def events_delete(self, event_id):
         
         session = Session()

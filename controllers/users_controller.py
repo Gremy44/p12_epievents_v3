@@ -4,14 +4,15 @@ from config import Session
 from views.users_view import User_View
 from models.users_model import User
 
+from permissions.permissions import Permissions
 
 class Users_Controller:
     
-    def __init__(self):
+    def __init__(self, user):
         self.my_view = User_View()
+        self.user = user
     
-    
-    
+    @Permissions.gestion_required
     def users_menu(self):
         """_summary_
         Call custormers view to display all customers
@@ -42,7 +43,8 @@ class Users_Controller:
                     self.users_delete(user_id)
         except IndexError:
             return
-                
+    
+    @Permissions.gestion_required            
     def users_detail(self, user_id):
         """_summary_
         Show user details
@@ -55,7 +57,8 @@ class Users_Controller:
         user = session.query(User).filter(User.id == user_id).first()
         
         self.my_view.users_view_detail(user)
-        
+    
+    @Permissions.gestion_required    
     def users_add(self):
         """_summary_
         Call users view to add a user
@@ -82,7 +85,7 @@ class Users_Controller:
         
         self.my_view.users_add_validate()
     
-    
+    @Permissions.gestion_required
     def users_update(self, user_id):
         
         session = Session()
@@ -106,7 +109,7 @@ class Users_Controller:
         
         self.my_view.users_update_validate()
     
-      
+    @Permissions.admin_required  
     def users_delete(self, user_id):
         
         session = Session()

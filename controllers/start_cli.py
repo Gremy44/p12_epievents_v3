@@ -70,7 +70,8 @@ class Start_Cli:
             password=('admin'),
             is_superuser = True,
             date_created=datetime.now(),
-            last_login=datetime.now()
+            last_login=datetime.now(),
+            role_id=3
         )
         
         create_user = User(

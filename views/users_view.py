@@ -1,8 +1,9 @@
 from utils.utils import Utils
+from utils.validators import Validators
 
 class User_View:
     def __init__(self):
-        pass
+        self.validator = Validators()
     
     def users_id_input(self):
         return input("Entrer l'id de l'utilisateur : ")
@@ -76,16 +77,22 @@ class User_View:
         '''
         Utils().clear_console()
         
-        print("----------------------------------------------------------") # 58
-        print("----------------  Nouvel utilisateur  --------------------") # 
-        print("----------------------------------------------------------") # 58
+        print("----------------------------------------------------------")
+        print("----------------  Nouvel utilisateur  --------------------")
+        print("----------------------------------------------------------")
+        
+        last_name = self.validator.validator_simple_text("last_name", "- Nom : ", False)
+        first_name = self.validator.validator_simple_text("first_name", "- Prénom : ", False)
+        email = self.validator.validator_email("email", "- Email : ", False)
+        password = self.validator.validator_password("password", "- Mot de passe : ", False)
+        role_id = self.validator.validator_role("role_id", "- Role (1-Vendeur|2-Support|3-Gestion): ", False)
         
         return {
-            'last_name': input("- Nom : "),
-            'first_name': input("- Prénom : "),
-            'email': input("- Email : "),
-            'password': input("- Mot de passe : "),
-            'role': input("- Role (1-Vendeur|2-Support|3-Gestion): "),
+            'last_name': last_name,
+            'first_name': first_name,
+            'email': email,
+            'password': password,
+            'role': role_id,
         }
         
     def users_view_update(self, user):
@@ -105,15 +112,15 @@ class User_View:
         print("----------------------------------------------------------")
     
         print(f'Nom : {user.last_name}')
-        last_name = input("- Modifier le nom : ")
+        last_name = self.validator.validator_simple_text("last_name", "- Modifier le Nom : ", True)
         print(f'Prénom : {user.first_name}')
-        first_name = input("- Modifier le prénom : ")
+        first_name = self.validator.validator_simple_text("first_name", "- Modifier le Prénom : ", True)
         print(f'Email : {user.email}')
-        email = input("- Modifier le mail : ")
+        email = self.validator.validator_email("email", "- Modifier l'email : ", True)
         print(f'Mot de passe :')
-        password = input("- Modifier le mot de passe : ")
+        password = self.validator.validator_password("password", "- Modifier le Mot de passe : ", True)
         print(f'Role : {user.role.role}')
-        role_id = input("- Modifier le role (1-Vendeur|2-Support|3-Gestion): ")
+        role_id = self.validator.validator_role("role_id", "- Modifier le Role (1-Vendeur|2-Support|3-Gestion): ", True)
         
         return {
             'last_name': last_name,
