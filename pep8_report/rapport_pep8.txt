@@ -1,0 +1,1 @@
+Vérification PEP 8 terminée. Aucune erreur trouvée.

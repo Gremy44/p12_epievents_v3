@@ -6,13 +6,15 @@ from argon2 import PasswordHasher
 Base = declarative_base()
 ph = PasswordHasher()
 
+
 class Role(Base):
-    __tablename__ = 'role'
+    __tablename__ = "role"
     id = Column(Integer, primary_key=True)
-    role = Column(String(50))
+    role = Column(String(45))
+
 
 class User(Base):
-    __tablename__ = 'user'
+    __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50))
     last_name = Column(String(50))
@@ -22,18 +24,19 @@ class User(Base):
     is_superuser = Column(Boolean, default=False)
     date_created = Column(DateTime)
     last_login = Column(DateTime)
-    role_id = Column(Integer, ForeignKey('role.id'), default=1)
+    role_id = Column(Integer, ForeignKey("role.id"), default=1)
 
     role = relationship(Role)
 
-    @validates('password')
+    @validates("password")
     def validate_password(self, key, password):
         hashed_password = ph.hash(password)
         return hashed_password
-    
+
     def verify_password(self, password):
         """
-        Vérifie si le mot de passe fourni correspond au mot de passe stocké dans le modèle.
+        Vérifie si le mot de passe fourni correspond au mot de
+        passe stocké dans le modèle.
 
         Args:
         - password (str): Mot de passe fourni par l'utilisateur.
@@ -46,4 +49,3 @@ class User(Base):
             return True
         except Exception:
             return False
-

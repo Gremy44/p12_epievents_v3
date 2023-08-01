@@ -5,6 +5,7 @@
 - Fonctionnement
 - Utilisation
 - Journalisation
+- Rapport PEP8
 
 #### 1 - Introduction
 Projet réaslisé dans le cadre de la formation développeur d'applications Python de Open Classrooms. Il met en situation la création d'une application CMS pour la gestion d'évènements. Celle-ci doit permettre de gérer les clients, les contrats, les évènements ainsi que les utilisateurs de la plateforme. L'application utilise la stack suivante : 
@@ -56,4 +57,7 @@ Une fois loggé vous arrivez dans le menu principal, duquel vous pourrez effectu
 
 ### 5 - Journalisation
 La journalisation avec Sentry se fait automatiquement, comme demandé dans l'exercice et vous enverra des alertes si une erreur fait planter l'application, si un utilisateur est ajouté ou modifié et si un contrat est signé.
+
+### 6 - Rapport PEP8
+Pour générer vous même un rapport pep8 pour verifier le bon formatage du code, vous pouvez executer la commande suivant depuis la racine du projet : `python pep8_report/pep8_report.py`
 

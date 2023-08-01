@@ -4,12 +4,11 @@ from config import Session
 from datetime import datetime
 import random
 
+
 class ContractSeeder(Seeder):
-    
     def run(self):
-        
         session = Session()
-        
+
         faker = Faker(
             cls=Contract,
             init={
@@ -20,12 +19,10 @@ class ContractSeeder(Seeder):
                 "rest": generator.Integer(start=1, end=400),
                 "creation_date": datetime.utcnow(),
                 "status": generator.Integer(start=0, end=1),
-            }
+            },
         )
-        
+
         for contract in faker.create(5):
             print("Adding contract: %s" % contract)
             session.add(contract)
             session.commit()
-
-    
