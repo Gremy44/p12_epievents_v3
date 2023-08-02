@@ -296,3 +296,6 @@ class Start_Cli:
 
         # clear console
         Utils().clear_console()
+
+        # delete database
+        os.remove(database_path)

@@ -11,10 +11,8 @@ from utils.utils import Utils
 
 
 class Console:
-    is_logged = False
-
     def __init__(self):
-        pass
+        self.is_logged = False
 
     def routing(self):
         """
@@ -27,11 +25,16 @@ class Console:
                 login = Login_Controller()
                 log = login.login()
 
+                # logout
+                if log is None:
+                    return
+
                 self.is_logged = log[0]
                 user = log[1]
 
                 if self.is_logged is False:
                     Generic_Errors.login_error()
+                    input("Press any key to continue...")
 
             # call function for update last login of the user
             login.update_last_login(user)

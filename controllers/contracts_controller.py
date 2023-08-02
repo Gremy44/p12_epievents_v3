@@ -109,7 +109,7 @@ class Contracts_Controller:
 
         self.my_view.contracts_add_validate()
 
-    @Permissions.gestion_required
+    @Permissions.sale_or_gestion_required
     def contracts_update(self, contract_id):
         session = Session()
 

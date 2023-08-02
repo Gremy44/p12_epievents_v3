@@ -13,9 +13,13 @@ class Login_Controller:
         Call the login view
         """
         view = Login_view()
-
+        
         # store user id
         self.id = view.login()
+
+        # logout
+        if self.id is None:
+            return
 
         return (self.id_validation(), self.logged_user())
 
@@ -31,6 +35,8 @@ class Login_Controller:
         session = Session()
 
         user = session.query(User).filter_by(email=self.id[0]).first()
+        
+        session.close()
 
         if user and user.verify_password(self.id[1]):
             return True
@@ -43,6 +49,8 @@ class Login_Controller:
         user.last_login = datetime.now()
 
         session.commit()
+        
+        session.close()
 
     def logged_user(self):
         """
@@ -52,5 +60,7 @@ class Login_Controller:
         session = Session()
 
         user = session.query(User).filter_by(email=self.id[0]).first()
+        
+        session.close()
 
         return user

@@ -104,7 +104,7 @@ class Events_Controller:
 
         self.my_view.events_add_validate()
 
-    @Permissions.support_required
+    @Permissions.support_or_gestion_required
     def events_update(self, event_id):
         session = Session()
 

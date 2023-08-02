@@ -28,4 +28,6 @@ class Login_view:
                 return (email, password)
             else:
                 input("Bye bye !")
-                sys.exit()
+                Utils().clear_console()
+                # sys.exit()
+                break

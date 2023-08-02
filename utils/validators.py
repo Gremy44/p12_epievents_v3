@@ -4,6 +4,9 @@ class Basic_Validators:
 
     def has_no_space(self, text):
         return " " not in text.strip()
+    
+    def has_space(self, text):
+        return " " in text.strip()
 
     def has_at_symbol(self, text):
         return "@" in text
@@ -179,21 +182,21 @@ class Validators(Basic_Validators):
                     return input_name
 
                 val_1 = self.check_no_special_character(input_name)
-                val_2 = self.check_letters(val_1[1])
+                # val_2 = self.check_letters(val_1[1])
 
-                validators = [val_1[0], val_2[0]]
+                validators = [val_1[0]]
 
                 if all(validators):
-                    return val_2[1]
+                    return val_1[1]
 
             # Classic check
             val_1 = self.check_no_special_character(input_name)
-            val_2 = self.check_letters(val_1[1])
+            # val_2 = self.check_letters(val_1[1])
 
-            validators = [val_1[0], val_2[0]]
+            validators = [val_1[0]]
 
             if all(validators):
-                return val_2[1]
+                return val_1[1]
 
     def validator_email(self, input_name: str, input_display: str, is_update: bool):
         while True:

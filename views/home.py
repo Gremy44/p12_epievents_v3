@@ -62,7 +62,6 @@ class Home_view:
             input(self.quit_message)
             self.session.close()
             is_logged = False
-            # sys.exit()
 
         return (choice, (1, 4), is_logged)
 
@@ -76,7 +75,7 @@ class Home_view:
         print("1 - Gestion des Clients")
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
-        print("4 - Quitter")
+        print("4 - Logout")
 
         choice = self.validator.validator_home("response", "Votre choix : ", self.user)
 
@@ -87,7 +86,6 @@ class Home_view:
             input(self.quit_message)
             self.session.close()
             is_logged = False
-            # sys.exit()
 
         return (choice, (1, 3), is_logged)
 
@@ -101,7 +99,7 @@ class Home_view:
         print("1 - Gestion des Clients")
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
-        print("4 - Quitter")
+        print("4 - Logout")
 
         choice = self.validator.validator_home("response", "Votre choix : ", self.user)
 
@@ -112,7 +110,6 @@ class Home_view:
             input(self.quit_message)
             self.session.close()
             is_logged = False
-            # sys.exit()
 
         return (choice, (1, 3), is_logged)
 
@@ -127,7 +124,7 @@ class Home_view:
         print("2 - Gestion des Contrats")
         print("3 - Gestion des Evènements")
         print("4 - Gestion des Utilisateurs")
-        print("5 - Quitter")
+        print("5 - Logout")
 
         choice = self.validator.validator_home("response", "Votre choix : ", self.user)
 
@@ -138,6 +135,5 @@ class Home_view:
             input(self.quit_message)
             self.session.close()
             is_logged = False
-            # sys.exit()
 
         return (choice, (1, 4), is_logged)
