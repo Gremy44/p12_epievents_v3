@@ -76,7 +76,7 @@ class Utils:
             print(
                 f"ID: {client.id}||Nom: {client.complet_name}|| Compagnie: {client.company_name}"
             )
-        
+
         return clients
 
     def retrieve_contract(self, client_id):

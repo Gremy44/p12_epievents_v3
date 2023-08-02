@@ -4,7 +4,7 @@ class Basic_Validators:
 
     def has_no_space(self, text):
         return " " not in text.strip()
-    
+
     def has_space(self, text):
         return " " in text.strip()
 

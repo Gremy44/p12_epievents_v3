@@ -53,7 +53,7 @@ class Permissions:
             return fn(self, *args, **kwargs)
 
         return wrapper
-    
+
     def support_or_gestion_required(fn):
         def wrapper(self, *args, **kwargs):
             if not (self.user.role_id == 2 or self.user.role_id == 3 or self.user.is_superuser != 0):
@@ -66,7 +66,7 @@ class Permissions:
             return fn(self, *args, **kwargs)
 
         return wrapper
-    
+
     def sale_or_gestion_required(fn):
         def wrapper(self, *args, **kwargs):
             if not (self.user.role_id == 1 or self.user.role_id == 3 or self.user.is_superuser != 0):

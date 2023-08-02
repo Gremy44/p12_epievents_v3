@@ -37,6 +37,19 @@ J'utilise ce profile pour tester mon interface, mes manipulation CRUD, etc... à
 
 **Le profil 'soutenance'**
 Je l'utilise pour le UserCase de ma soutenance de projet. Il crée une nouvelle base de données à chaque execution en supprimant la précédente et ses tables sont pré-rempli pour m'aider dans ma démonstration de soutenance. A part pour ma soutenance, il n'aura pas d'utilité en développement ou en production. 
+Il contient 4 profils utilisateur :
+- Admin 
+> ID : admin@email.com
+> MDP : admin
+- Saler
+> ID : saler@email.com
+> MDP : saler
+- Gestion
+> ID : gestion@email.com
+> MDP : gestion
+- Support
+> ID : support@email.com
+> MDP : support
 
 **Le profil 'production'**
 C'est le profil principal, avec une base donnée persistente. Il reflête le fonctionnement normal de l'application. Ses tables sont vides à l'exception du profil Admin.

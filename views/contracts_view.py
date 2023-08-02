@@ -150,7 +150,8 @@ class Contracts_View:
         sale = Utils().retrieve_saler()
         Utils().print_queryset(sale)
         # sale_contact_id = input("- Modifier la Date de Début : ")
-        sale_contact_id = self.validator.validator_id("sale_contact_id", "- Modifier Contact vendeur : ", True)
+        sale_contact_id = self.validator.validator_id(
+            "sale_contact_id", "- Modifier Contact vendeur : ", True)
 
         print(f"Montant du contrat : {contract.amount}")
         # amount = input("- Modifier le montant : ")
@@ -164,7 +165,7 @@ class Contracts_View:
         # status = input("- Modifier le status du contrat (1 ou 0): ")
         status = self.validator.validator_id("status", "- Modifier le status du contrat (1 ou 0): ", True)
         self.validator.check_interval(status, 0, 1)
-        
+
         return {
             "customer_id": customer_id,
             "sale_contact_id": sale_contact_id,
